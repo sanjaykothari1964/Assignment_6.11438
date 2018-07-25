@@ -1,0 +1,40 @@
+git@github.com:sanjaykothari1964/Assignment_6.11438.git
+'''Assignment 6.1'''
+'''Write a function so that the columns of the output matrix are powers of the input
+vector.
+The order of the powers is determined by the increasing boolean argument. Specifically,
+when increasing is False, the i-th output column is the input vector raised element-wise
+to the power of N - i - 1.
+
+HINT: Such a matrix with a geometric progression in each row is named for Alexandre-
+Theophile Vandermonde.'''
+def vander_Input(x,N,order):
+    X=x.size
+    result_array=np.empty((N,X),dtype=int)
+    
+    if order.upper()=="TRUE":
+        for i in range(N):
+            power_vector=np.array(np.power(x,i))
+            result_array[i]=power_vector
+    else:
+        for i in range(N-1,-1,-1):
+            power_vector=np.array(np.power(x,i))
+            result_array[(N-1)-i]=power_vector
+    return result_array
+import numpy as np
+print('Generate a Vandermonde matrix...')
+
+N=int(input('Enter the value of N power :'))
+
+print('Enter comma separated list of elements eg. 1,2,3 :')
+input_vector=input()
+input_list=list(map(int,input_vector.split(',')))
+x=np.array(input_list)
+print('Input vector is :')
+print(x)
+
+order=input("Enter 'True' for increasing order of powers else enter 'False' :")
+
+result_array=vander_Input(x,N,order)
+print('The resultant Vandermonde matrix is :')
+print(result_array.T)
